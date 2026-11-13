@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff1f5">
+  <meta name="description" content="A little apology, made with care, for Sakshi.">
+  <title>For Sakshi 💗</title>
+  <style>
+    :root {
+      --ink: #563d50;
+      --muted: #876b80;
+      --pink: #f6a9c2;
+      --pink-dark: #d96f9a;
+      --cream: #fffaf7;
+      --lavender: #eee8ff;
+      --line: rgba(140, 91, 123, .15);
+      --shadow: 0 22px 70px rgba(132, 78, 112, .14);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; min-height: 100vh; overflow-x: hidden; color: var(--ink);
+      font-family: ui-rounded, "Segoe UI", system-ui, -apple-system, sans-serif;
+      background:
+        radial-gradient(ellipse at 12% 12%, rgba(255, 204, 222, .72), transparent 35%),
+        radial-gradient(ellipse at 90% 22%, rgba(220, 211, 255, .72), transparent 33%),
+        linear-gradient(145deg, #fff8f6 0%, #fff0f5 52%, #f7f1ff 100%);
+    }
+    button { font: inherit; }
+    .sparkle {
+      position: fixed; z-index: 0; pointer-events: none; opacity: .55;
+      animation: drift 8s ease-in-out infinite;
+    }
+    .sparkle:nth-child(2n) { animation-delay: -3s; }
+    @keyframes drift { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-18px) rotate(12deg); } }
+    .wrap { position: relative; z-index: 1; width: min(760px, calc(100% - 32px)); margin: 0 auto; padding: 38px 0 64px; }
+    .topline { text-align: center; color: var(--muted); font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; }
+    .hero { text-align: center; padding: 35px 0 20px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.62); color: var(--pink-dark); font-size: .84rem; }
+    h1 { margin: 20px 0 10px; font-size: clamp(2.5rem, 9vw, 5rem); line-height: .98; letter-spacing: -.055em; color: #70465f; }
+    h1 span { color: var(--pink-dark); }
+    .sub { max-width: 520px; margin: 0 auto; color: var(--muted); font-size: clamp(1rem, 3vw, 1.13rem); line-height: 1.7; }
+    .card {
+      margin: 28px auto 0; padding: clamp(22px, 5vw, 42px); max-width: 650px;
+      border: 1px solid rgba(255,255,255,.9); border-radius: 30px;
+      background: rgba(255,255,255,.72); box-shadow: var(--shadow); backdrop-filter: blur(12px);
+    }
+    .envelope-area { display: grid; place-items: center; padding: 12px 0 4px; }
+    .envelope {
+      position: relative; width: 190px; height: 132px; border: 0; cursor: pointer; background: transparent;
+      filter: drop-shadow(0 13px 13px rgba(175, 102, 139, .18)); transition: transform .25s ease;
+    }
+    .envelope:hover { transform: translateY(-5px) rotate(-2deg); }
+    .env-body { position: absolute; inset: 22px 0 0; border-radius: 9px; background: linear-gradient(135deg, #f6a9c2, #e989b0); overflow: hidden; }
+    .env-body:before, .env-body:after { content:""; position:absolute; bottom:0; width:0; height:0; border-style:solid; }
+    .env-body:before { left:0; border-width: 68px 95px 0 0; border-color: #f9c2d3 transparent transparent transparent; }
+    .env-body:after { right:0; border-width: 68px 0 0 95px; border-color: #f4b3ca transparent transparent transparent; }
+    .flap { position:absolute; top:22px; left:0; width:0; height:0; border-left:95px solid transparent; border-right:95px solid transparent; border-top:72px solid #fbd0dd; transform-origin:top; transition: transform .7s ease; z-index:3; }
+    .letter-icon { position:absolute; z-index:2; top:2px; left:50%; transform:translateX(-50%); font-size:2.3rem; transition: transform .7s ease; }
+    .envelope.open .flap { transform: rotateX(180deg); }
+    .envelope.open .letter-icon { transform: translate(-50%,-34px); }
+    .hint { margin: 14px 0 0; color: var(--muted); font-size: .9rem; }
+    .letter { display: none; margin-top: 25px; padding: clamp(20px, 4vw, 30px); text-align: left; border-radius: 22px; background: linear-gradient(145deg, #fff9fb, #fff7ff); border: 1px solid #f7dce8; animation: rise .7s ease both; }
+    .letter.show { display: block; }
+    @keyframes rise { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+    .letter h2 { margin: 0 0 15px; font-size: 1.45rem; color: #a6577c; }
+    .letter p { margin: 0 0 13px; color: #70576b; line-height: 1.8; font-size: 1rem; }
+    .signature { margin-top: 22px !important; color: #a6577c !important; font-weight: 700; }
+    .tiny-note { text-align: center; color: var(--muted); font-size: .9rem; margin: 24px 0 0; }
+    .forgive-wrap { display: none; text-align: center; margin-top: 28px; animation: rise .6s ease both; }
+    .forgive-wrap.show { display:block; }
+    .forgive-btn {
+      border: 0; border-radius: 999px; padding: 15px 27px; cursor: pointer; color: white; font-weight: 800;
+      background: linear-gradient(135deg, #e985ac, #c987d8); box-shadow: 0 10px 25px rgba(201, 119, 166, .28);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .forgive-btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 15px 30px rgba(201, 119, 166, .35); }
+    .forgive-btn:active { transform: scale(.98); }
+    .response { min-height: 34px; margin: 15px 0 0; color: #a6577c; font-weight: 700; }
+    footer { text-align: center; color: #987f91; font-size: .78rem; margin-top: 34px; }
+    .heart { position: fixed; bottom: -30px; z-index: 4; pointer-events: none; animation: floatUp 3.8s ease-in forwards; }
+    @keyframes floatUp { to { transform: translateY(-110vh) rotate(30deg); opacity: 0; } }
+    @media (max-width: 480px) {
+      .wrap { padding-top: 25px; }
+      .hero { padding-top: 26px; }
+      .card { border-radius: 24px; }
+      .envelope { transform: scale(.92); }
+      .envelope:hover { transform: scale(.92) translateY(-5px) rotate(-2deg); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+
+/* Interactive surprise cards */
+
+.keepsakes {
+    display: none;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 28px 0 15px;
+    animation: rise .7s ease both;
+}
+
+.keepsakes.show {
+    display: grid;
+}
+
+.keepsake {
+    min-height: 125px;
+    padding: 16px 8px;
+    border: 1px solid #f3d5e3;
+    border-radius: 20px;
+    background: linear-gradient(145deg, #fffafd, #fff0f6);
+    color: #98617f;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(132, 78, 112, .08);
+    transition: all .3s ease;
+}
+
+.keepsake:hover {
+    transform: translateY(-7px) rotate(-2deg);
+    box-shadow: 0 14px 25px rgba(132, 78, 112, .16);
+}
+
+.keepsake span {
+    display: block;
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.keepsake p {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.reveal-note {
+    display: none;
+    padding: 18px;
+    margin-top: 15px;
+    border-radius: 18px;
+    background: #fff0f6;
+    border: 1px dashed #eab5cc;
+    color: #86536f;
+    text-align: center;
+    line-height: 1.7;
+}
+
+.reveal-note.show {
+    display: block;
+    animation: rise .4s ease;
+}
+
+@media (max-width: 480px) {
+    .keepsakes {
+        gap: 7px;
+    }
+
+    .keepsake {
+        min-height: 105px;
+        padding: 12px 4px;
+    }
+
+    .keepsake p {
+        font-size: 11px;
+    }
+}
+
+
+/* Scratch card experience */
+
+.scratch-section {
+    display: none;
+    margin-top: 30px;
+    text-align: center;
+    animation: rise .7s ease;
+}
+
+.scratch-section.show {
+    display: block;
+}
+
+.scratch-section h3 {
+    color: #a6577c;
+}
+
+.scratch-section > p {
+    color: #98758a;
+    font-size: 14px;
+}
+
+.scratch-container {
+    position: relative;
+    width: 100%;
+    max-width: 390px;
+    height: 190px;
+    margin: 20px auto;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(132,78,112,.15);
+}
+
+.scratch-message {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background: linear-gradient(135deg, #ffe0ec, #f5dfff);
+    color: #a6577c;
+}
+
+.scratch-message span {
+    font-size: 30px;
+}
+
+.scratch-message h2 {
+    margin: 5px 0;
+    font-size: 25px;
+}
+
+.scratch-message p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.scratch-message h3 {
+    margin: 5px 0;
+}
+
+#scratchCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+    cursor: crosshair;
+}
+
+.scratch-hint {
+    font-size: 13px;
+    color: #a77c95;
+}
+
+  </style>
+</head>
+<body>
+  <span class="sparkle" style="top:10%;left:8%;font-size:22px">✦</span>
+  <span class="sparkle" style="top:22%;right:9%;font-size:17px">♡</span>
+  <span class="sparkle" style="top:66%;left:5%;font-size:20px">✧</span>
+  <span class="sparkle" style="top:78%;right:7%;font-size:24px">♡</span>
+
+  <main class="wrap">
+    <div class="topline">a tiny page made with care</div>
+    <header class="hero">
+      <div class="eyebrow">💌 a little message for you</div>
+      <h1>Hey, <span>Sakshi</span>!</h1>
+      <p class="sub">Before your day gets busy, there's something I wanted to say. And yes, I made an entire website for it. Dramatic? Maybe. Deserved? Absolutely. 🥹</p>
+    </header>
+
+    <section class="card" aria-label="Apology letter">
+      <div class="envelope-area">
+        <button class="envelope" id="envelope" aria-label="Open your letter" aria-expanded="false">
+          <span class="letter-icon">💌</span>
+          <span class="env-body"></span>
+          <span class="flap"></span>
+        </button>
+        <p class="hint" id="hint">Tap the little envelope to open your message ✨</p>
+      </div>
+
+      <article class="letter" id="letter">
+        <h2>Dear Sakshi, 💗</h2>
+        <p>I'm really sorry about the night. I genuinely didn't mean to ignore you — I somehow fell asleep without even realising it. One moment I was here, and the next moment… good night, apparently. 😭</p>
+        <p>I know it probably felt like I was ignoring you, and I can understand why that would hurt. But please don't think it was intentional, or that I don't care. I do.</p>
+        <p>You're not just someone I happen to talk to. You're my bestie, and I genuinely value our friendship. I may occasionally lose a fight against sleep, but that doesn't mean I'm taking you for granted. 😂</p>
+        <p>Next time I'll try to give you a proper heads-up instead of disappearing like a phone with 0% battery. Deal? 🫡</p>
+        <p>Thank you for being you, and for putting up with my sleepy nonsense. I hope this little page makes you smile when you wake up.</p>
+        <p class="signature">Truce? Bestie? 🥺<br>— Your occasionally-sleepy friend</p>
+      </article>
+
+<div class="keepsakes" id="keepsakes">
+
+    <button class="keepsake" data-note="You make even ordinary days special. I'm genuinely glad we became friends. 🌷">
+        <span>🌷</span>
+        <p>A little note</p>
+    </button>
+
+    <button class="keepsake" data-note="Official report: Sakshi is an amazing bestie. But she must tolerate one sleepy friend. 😂">
+        <span>🎀</span>
+        <p>Bestie report</p>
+    </button>
+
+    <button class="keepsake" data-note="No matter how busy life gets, I genuinely value our friendship. Pinky promise! 🤞">
+        <span>💌</span>
+        <p>A promise</p>
+    </button>
+
+</div>
+
+<div class="reveal-note" id="revealNote">
+    Choose a surprise! 💗
+</div>
+
+<!-- Scratch-to-reveal surprise -->
+
+<div class="scratch-section" id="scratchSection">
+
+    <h3>🎟️ One last little surprise!</h3>
+
+    <p>Something is hidden underneath...
+       Scratch to discover! 🥹</p>
+
+    <div class="scratch-container">
+
+        <div class="scratch-message">
+            <span>💗</span>
+            <h2>NO REFUNDS!</h2>
+            <p>You're officially stuck with me
+               as your bestie forever.</p>
+            <h3>Deal with it! 😂</h3>
+        </div>
+
+        <canvas id="scratchCanvas"></canvas>
+
+    </div>
+
+    <p class="scratch-hint">
+        Use your finger or mouse to scratch! ✨
+    </p>
+
+</div>
+
+
+
+      <div class="forgive-wrap" id="forgiveWrap">
+        <p class="tiny-note">Okay, your turn. I am waiting very patiently. (Not really.) 👀</p>
+        <button class="forgive-btn" id="forgiveBtn">FORGIVEN! 😌💗</button>
+        <p class="response" id="response" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <p class="tiny-note">P.S. No pressure to reply immediately. Just wanted you to know. 🌷</p>
+    <footer>made with 💗, a little guilt, and questionable sleep discipline</footer>
+  </main>
+
+  <script>
+    const envelope = document.getElementById('envelope');
+    const letter = document.getElementById('letter');
+    const hint = document.getElementById('hint');
+    const forgiveWrap = document.getElementById('forgiveWrap');
+    const forgiveBtn = document.getElementById('forgiveBtn');
+    const response = document.getElementById('response');
+
+const keepsakes = document.getElementById('keepsakes');
+const revealNote = document.getElementById('revealNote');
+
+let openedCards = new Set();
+
+
+    envelope.addEventListener('click', () => {
+      const opened = envelope.classList.toggle('open');
+      envelope.setAttribute('aria-expanded', String(opened));
+      letter.classList.toggle('show', opened);
+      forgiveWrap.classList.toggle('show', opened);
+      keepsakes.classList.toggle('show', opened);
+      hint.textContent = opened ? 'A small note, from me to you 💗' : 'Tap the little envelope to open your message ✨';
+      if (opened) {
+        setTimeout(() => letter.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 120);
+      }
+    });
+
+document.querySelectorAll('.keepsake').forEach((button, index) => {
+
+    button.addEventListener('click', () => {
+
+        // Reveal the hidden message
+        revealNote.textContent = button.dataset.note;
+
+        revealNote.classList.remove('show');
+
+        void revealNote.offsetWidth;
+
+        revealNote.classList.add('show');
+
+        // Remember which cards she has opened
+        openedCards.add(index);
+
+        // Check whether all three cards are opened
+        if (openedCards.size === 3) {
+
+          document.getElementById('scratchSection')
+    .classList.add('show');
+    requestAnimationFrame(() => {
+    setupScratchCard();
+}); 
+
+            const surprise = document.createElement('div');
+
+            surprise.className = 'reveal-note show';
+
+            surprise.innerHTML =
+                '🥹 You unlocked the friendship surprise! ' +
+                '<br><br>' +
+                'Thank you for being my favourite human to annoy. ' +
+                'Now please forgive this sleepy idiot. 😂💗';
+
+            document.getElementById('keepsakes')
+                .after(surprise);
+
+        }
+
+    });
+
+});
+
+
+    forgiveBtn.addEventListener('click', () => {
+      response.textContent = 'YAYYYYY! 🥳 Friendship status: RESTORED. I owe you one virtual hug! 🤗';
+      forgiveBtn.textContent = 'BESTIES AGAIN! 🫶';
+      for (let i = 0; i < 22; i++) {
+        setTimeout(() => {
+          const heart = document.createElement('span');
+          heart.className = 'heart';
+          heart.textContent = ['💗', '💖', '💕', '✨', '🌸'][Math.floor(Math.random() * 5)];
+          heart.style.left = Math.random() * 100 + 'vw';
+          heart.style.fontSize = (16 + Math.random() * 18) + 'px';
+          document.body.appendChild(heart);
+          setTimeout(() => heart.remove(), 4000);
+        }, i * 65);
+      }
+    });
+
+/* =================================
+   SCRATCH CARD INTERACTION
+================================= */
+
+const scratchCanvas = document.getElementById("scratchCanvas");
+const scratchCtx = scratchCanvas.getContext("2d");
+
+let isScratching = false;
+let scratchRevealed = false;
+
+// Prepare the scratch surface
+function setupScratchCard() {
+
+    const rect = scratchCanvas.getBoundingClientRect();
+
+    const pixelRatio = window.devicePixelRatio || 1;
+
+    scratchCanvas.width = rect.width * pixelRatio;
+    scratchCanvas.height = rect.height * pixelRatio;
+
+    scratchCtx.scale(pixelRatio, pixelRatio);
+
+    // Pink scratch coating
+    const gradient = scratchCtx.createLinearGradient(
+        0, 0, rect.width, rect.height
+    );
+
+    gradient.addColorStop(0, "#eeb4d0");
+    gradient.addColorStop(0.5, "#f7c9df");
+    gradient.addColorStop(1, "#dca9e9");
+
+    scratchCtx.fillStyle = gradient;
+    scratchCtx.fillRect(0, 0, rect.width, rect.height);
+
+    // Text on the coating
+    scratchCtx.fillStyle = "#ffffff";
+    scratchCtx.textAlign = "center";
+    scratchCtx.font = "bold 20px sans-serif";
+
+    scratchCtx.fillText(
+        "SCRATCH HERE ✨",
+        rect.width / 2,
+        rect.height / 2
+    );
+
+    scratchCtx.font = "14px sans-serif";
+
+    scratchCtx.fillText(
+        "Your surprise is waiting!",
+        rect.width / 2,
+        rect.height / 2 + 27
+    );
+
+}
+
+// Erase the coating
+function scratchAt(x, y) {
+
+    if (scratchRevealed) return;
+
+    scratchCtx.globalCompositeOperation = "destination-out";
+
+    scratchCtx.beginPath();
+
+    scratchCtx.arc(x, y, 20, 0, Math.PI * 2);
+
+    scratchCtx.fill();
+
+    checkScratchProgress();
+}
+
+// Calculate how much has been scratched
+function checkScratchProgress() {
+
+    const imageData = scratchCtx.getImageData(
+        0, 0,
+        scratchCanvas.width,
+        scratchCanvas.height
+    );
+
+    const pixels = imageData.data;
+
+    let transparentPixels = 0;
+    let totalPixels = 0;
+
+    // Sample pixels to keep the calculation lightweight
+    for (let i = 3; i < pixels.length; i += 4 * 20) {
+
+        totalPixels++;
+
+        if (pixels[i] < 128) {
+            transparentPixels++;
+        }
+
+    }
+
+    const progress = transparentPixels / totalPixels;
+
+    // Reveal automatically after 45% scratching
+    if (progress > 0.45) {
+
+        scratchRevealed = true;
+
+        scratchCtx.clearRect(
+            0, 0,
+            scratchCanvas.width,
+            scratchCanvas.height
+        );
+
+        scratchCanvas.style.transition = "opacity .6s ease";
+        scratchCanvas.style.opacity = "0";
+
+        setTimeout(() => {
+            scratchCanvas.style.display = "none";
+        }, 650);
+
+    }
+
+}
+
+// Mouse and touchscreen support
+scratchCanvas.addEventListener("pointerdown", (event) => {
+
+    if (scratchRevealed) return;
+
+    isScratching = true;
+
+    scratchCanvas.setPointerCapture(event.pointerId);
+
+    const rect = scratchCanvas.getBoundingClientRect();
+
+    scratchAt(
+        event.clientX - rect.left,
+        event.clientY - rect.top
+    );
+
+});
+
+scratchCanvas.addEventListener("pointermove", (event) => {
+
+    if (!isScratching || scratchRevealed) return;
+
+    const rect = scratchCanvas.getBoundingClientRect();
+
+    scratchAt(
+        event.clientX - rect.left,
+        event.clientY - rect.top
+    );
+
+});
+
+scratchCanvas.addEventListener("pointerup", () => {
+    isScratching = false;
+});
+
+scratchCanvas.addEventListener("pointercancel", () => {
+    isScratching = false;
+});
+
+
+
+  </script>
+</body>
+</html>
